@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import { GAME_CONFIG } from "../Config";
 
 export const useGamePhysics = (
@@ -17,6 +18,11 @@ export const useGamePhysics = (
 ) => {
   const scoredObstacles = useRef(new Set());
   const animationFrameId = useRef(null);
+  const velocityRef = useRef(velocity);
+
+  useEffect(() => {
+    velocityRef.current = velocity;
+  }, [velocity]);
 
   useEffect(() => {
     if (!gameStarted || gameOver) {
@@ -25,9 +31,13 @@ export const useGamePhysics = (
 
     const gameLoop = () => {
       ////update player vertical position
-      setVelocity((v) => v + GAME_CONFIG.gravity);
+      setVelocity((v) => {
+        const newVelocity = v + GAME_CONFIG.gravity;
+        velocityRef.current = newVelocity;
+        return newVelocity;
+      });
       setPlayerY((y) => {
-        const newY = y + velocity;
+        const newY = y + velocityRef.current;
         if (newY > GAME_CONFIG.height - GAME_CONFIG.playerSize) {
           setGameOver(true);
           return GAME_CONFIG.height - GAME_CONFIG.playerSize;
@@ -83,11 +93,11 @@ export const useGamePhysics = (
       setObstacles((prevObstacles) => {
         prevObstacles.forEach((obs) => {
           if (
-            obs.X + GAME_CONFIG.obstacleWidth < playerX &&
+            obs.x + GAME_CONFIG.obstacleWidth < playerX &&
             !scoredObstacles.current.has(obs.id)
           ) {
             scoredObstacles.current.add(obs.id);
-            setGameOver((s) => s + 1);
+            setScore((s) => s + 1);
           }
 
           if (

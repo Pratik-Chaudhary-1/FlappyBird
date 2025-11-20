@@ -22,7 +22,7 @@ export const useKeyboard = (gameOver, gameStarted, onJump, onRestart) => {
         keysPressed.current[e.code] = true;
       }
 
-      if (e.code === "keyR" && gameOver) {
+      if (e.code === "KeyR" && gameOver) {
         onRestart();
       }
     };

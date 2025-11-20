@@ -2,7 +2,7 @@ const Controls = () => {
   return (
     <div className="controls">
       <p className="controls-title">Controls:</p>
-      <P>SPACE/↑ - Jump | ← → - Move Left/Right | R - Restart</P>
+      <p>SPACE/↑ - Jump | ← → - Move Left/Right | R - Restart</p>
     </div>
   );
 };

@@ -1,62 +1,348 @@
-.score-display {
-  font-size: 24px;
-  font-weight: bold;
-  color: #fcd34d;
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: 10px 24px;
-  border-radius: 8px;
-  display: inline-block;
+/* Anime-inspired Color Palette and Animations */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
+/* Keyframe Animations */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes glow {
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(255, 105, 180, 0.5),
+      0 0 40px rgba(255, 105, 180, 0.3), 0 0 60px rgba(255, 105, 180, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(255, 105, 180, 0.8),
+      0 0 60px rgba(255, 105, 180, 0.5), 0 0 90px rgba(255, 105, 180, 0.3);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-100px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes rainbow {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  100% {
+    filter: hue-rotate(360deg);
+  }
+}
+
+@keyframes sparkle {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+/* Container and Layout */
+.game-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(
+    135deg,
+    #667eea 0%,
+    #764ba2 25%,
+    #f093fb 50%,
+    #4facfe 75%,
+    #00f2fe 100%
+  );
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  padding: 20px;
+  font-family: "Poppins", sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Decorative Stars */
+.game-container::before {
+  content: "✦ ✧ ★ ✦ ✧ ★ ✦ ✧ ★";
+  position: absolute;
+  top: 10%;
+  left: 0;
+  right: 0;
+  font-size: 30px;
+  color: rgba(255, 255, 255, 0.3);
+  text-align: center;
+  animation: sparkle 3s ease-in-out infinite;
+  letter-spacing: 30px;
+}
+
+.game-header {
+  margin-bottom: 25px;
+  text-align: center;
+  animation: slideIn 0.8s ease-out;
+}
+
+.game-title {
+  font-size: 48px;
+  font-weight: 900;
+  background: linear-gradient(45deg, #ff6ec4, #7873f5, #4facfe, #ff6ec4);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradient 3s ease infinite, float 3s ease-in-out infinite;
+  margin-bottom: 15px;
+  text-shadow: 0 0 30px rgba(255, 110, 196, 0.5);
+  letter-spacing: 2px;
+  position: relative;
+}
+
+.game-title::before {
+  content: "◆";
+  position: absolute;
+  left: -40px;
+  color: #ff6ec4;
+  animation: sparkle 2s ease-in-out infinite;
+}
+
+.game-title::after {
+  content: "◆";
+  position: absolute;
+  right: -40px;
+  color: #7873f5;
+  animation: sparkle 2s ease-in-out infinite 1s;
+}
+
+/* Score Display */
+.score-display {
+  font-size: 28px;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 12px 30px;
+  border-radius: 50px;
+  display: inline-block;
+  animation: glow 2s ease-in-out infinite, pulse 2s ease-in-out infinite;
+  border: 3px solid #fff;
+  box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+  position: relative;
+  overflow: hidden;
+}
+
+.score-display::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transform: rotate(45deg);
+  animation: shine 3s infinite;
+}
+
+@keyframes shine {
+  0% {
+    transform: translateX(-100%) translateY(-100%) rotate(45deg);
+  }
+  100% {
+    transform: translateX(100%) translateY(100%) rotate(45deg);
+  }
+}
+
+/* Game Box */
+.game-box {
+  position: relative;
+  background: linear-gradient(180deg, #87ceeb 0%, #ffb6d9 50%, #ffa07a 100%);
+  border: 6px solid #fff;
+  border-radius: 20px;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3), 0 0 50px rgba(255, 110, 196, 0.4),
+    inset 0 0 30px rgba(255, 255, 255, 0.2);
+  overflow: hidden;
+  animation: float 4s ease-in-out infinite;
+}
+
+/* Ground with Anime Style */
+.ground {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 80px;
+  background: linear-gradient(180deg, #7cfc00 0%, #32cd32 50%, #228b22 100%);
+  border-top: 5px solid #ffd700;
+  position: relative;
+  overflow: hidden;
+}
+
+.ground::before {
+  content: "🌸 🌺 🌸 🌺 🌸 🌺 🌸 🌺 🌸 🌺";
+  position: absolute;
+  top: -20px;
+  left: 0;
+  right: 0;
+  font-size: 20px;
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Player - Anime Character Style */
 .player {
   position: absolute;
-  background-color: #ef4444;
+  background: radial-gradient(circle at 30% 30%, #ff69b4, #ff1493, #c71585);
   border-radius: 50%;
-  border: 4px solid #991b1b;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  border: 5px solid #fff;
+  box-shadow: 0 8px 20px rgba(255, 20, 147, 0.6),
+    0 0 30px rgba(255, 105, 180, 0.8), inset 0 0 20px rgba(255, 255, 255, 0.5);
+  animation: pulse 1s ease-in-out infinite;
+  position: relative;
+  overflow: hidden;
+}
+
+.player::before {
+  content: "✨";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 20px;
+  animation: sparkle 1.5s ease-in-out infinite;
 }
 
 .player-inner {
   position: absolute;
-  top: 8px;
-  left: 8px;
-  right: 8px;
-  bottom: 8px;
-  background-color: #f87171;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  background: radial-gradient(circle at 30% 30%, #ffb6d9, #ff69b4);
   border-radius: 50%;
+  box-shadow: inset 0 0 15px rgba(255, 255, 255, 0.8);
 }
 
+/* Obstacles - Anime Pillar Style */
 .obstacle {
   position: absolute;
-  background-color: #16a34a;
-  border: 4px solid #14532d;
+  background: linear-gradient(90deg, #9370db 0%, #8a2be2 50%, #9370db 100%);
+  border: 5px solid #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(138, 43, 226, 0.6),
+    inset 0 0 20px rgba(255, 255, 255, 0.3);
+  animation: rainbow 10s linear infinite;
 }
 
 .obstacle-inner {
   width: 100%;
   height: 100%;
+  position: relative;
 }
 
 .obstacle-top {
-  background: linear-gradient(to bottom, #22c55e, #16a34a);
-  box-shadow: inset 0 -10px 20px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(180deg, #ba55d3 0%, #9370db 50%, #8a2be2 100%);
+  box-shadow: inset 0 -10px 30px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+}
+
+.obstacle-top::before {
+  content: "⚡";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 30px;
+  animation: sparkle 2s ease-in-out infinite;
 }
 
 .obstacle-bottom {
-  background: linear-gradient(to top, #22c55e, #16a34a);
-  box-shadow: inset 0 10px 20px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(0deg, #ba55d3 0%, #9370db 50%, #8a2be2 100%);
+  box-shadow: inset 0 10px 30px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
 }
 
+.obstacle-bottom::before {
+  content: "⚡";
+  position: absolute;
+  bottom: 20%;
+  left: 50%;
+  transform: translate(-50%, 0);
+  font-size: 30px;
+  animation: sparkle 2s ease-in-out infinite 1s;
+}
+
+/* Overlays */
 .overlay {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.6);
+  background: linear-gradient(
+    135deg,
+    rgba(102, 126, 234, 0.9),
+    rgba(118, 75, 162, 0.9)
+  );
   display: flex;
   align-items: center;
   justify-content: center;
+  backdrop-filter: blur(10px);
+  animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .overlay-dark {
@@ -65,50 +351,109 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.7);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 20, 147, 0.9),
+    rgba(138, 43, 226, 0.9)
+  );
   display: flex;
   align-items: center;
   justify-content: center;
+  backdrop-filter: blur(10px);
+  animation: fadeIn 0.5s ease-out;
 }
 
 .overlay-content {
   text-align: center;
   color: white;
+  animation: slideIn 0.8s ease-out;
 }
 
 .overlay-title {
-  font-size: 36px;
-  font-weight: bold;
-  margin-bottom: 20px;
+  font-size: 48px;
+  font-weight: 900;
+  margin-bottom: 25px;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.8),
+    0 0 40px rgba(255, 105, 180, 0.6);
+  animation: pulse 2s ease-in-out infinite;
 }
 
 .overlay-title-large {
-  font-size: 48px;
-  font-weight: bold;
-  margin-bottom: 20px;
-  color: #ef4444;
+  font-size: 64px;
+  font-weight: 900;
+  margin-bottom: 25px;
+  background: linear-gradient(45deg, #ff1493, #ffd700, #ff1493);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradient 3s ease infinite, pulse 2s ease-in-out infinite;
+  text-shadow: 0 0 40px rgba(255, 215, 0, 0.8);
 }
 
 .overlay-text {
-  font-size: 20px;
-  margin-bottom: 10px;
+  font-size: 24px;
+  margin-bottom: 12px;
+  font-weight: 600;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  animation: float 3s ease-in-out infinite;
 }
 
 .overlay-text-large {
-  font-size: 28px;
-  margin-bottom: 20px;
+  font-size: 36px;
+  margin-bottom: 25px;
+  font-weight: 700;
+  text-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  animation: pulse 2s ease-in-out infinite;
 }
 
-.controls {
-  margin-top: 20px;
+/* Controls Info */
+.controls-info {
+  margin-top: 25px;
   color: white;
   text-align: center;
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: 12px 24px;
-  border-radius: 8px;
+  background: linear-gradient(
+    135deg,
+    rgba(102, 126, 234, 0.8),
+    rgba(118, 75, 162, 0.8)
+  );
+  padding: 15px 35px;
+  border-radius: 50px;
+  border: 3px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 0 0 20px rgba(102, 126, 234, 0.4);
+  backdrop-filter: blur(10px);
+  animation: float 3s ease-in-out infinite;
 }
 
 .controls-title {
-  font-weight: bold;
-  margin-bottom: 5px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  font-size: 18px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.controls-info p:last-child {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+  .game-title {
+    font-size: 36px;
+  }
+
+  .score-display {
+    font-size: 22px;
+    padding: 10px 25px;
+  }
+
+  .overlay-title {
+    font-size: 36px;
+  }
+
+  .overlay-title-large {
+    font-size: 48px;
+  }
 }
