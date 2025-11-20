@@ -1,3 +1,13 @@
+.score-display {
+  font-size: 24px;
+  font-weight: bold;
+  color: #fcd34d;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 10px 24px;
+  border-radius: 8px;
+  display: inline-block;
+}
+
 .player {
   position: absolute;
   background-color: #ef4444;
@@ -35,4 +45,56 @@
 .obstacle-bottom {
   background: linear-gradient(to top, #22c55e, #16a34a);
   box-shadow: inset 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.overlay-dark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.overlay-content {
+  text-align: center;
+  color: white;
+}
+
+.overlay-title {
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.overlay-title-large {
+  font-size: 48px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #ef4444;
+}
+
+.overlay-text {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.overlay-text-large {
+  font-size: 28px;
+  margin-bottom: 20px;
 }
